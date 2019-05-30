@@ -42,7 +42,7 @@ class Pinglun extends Component {
         let {data}=this.props
         return (
         <View className='pinglun'>
-            <View>最新评论</View>
+            <View className='now'>最新评论</View>
             {
                 data.map((item)=>(
                     <View key={item.id} className='userCont'>
