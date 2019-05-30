@@ -12,7 +12,7 @@ export default class Newest extends Component {
         this.state={
             left:[],
             right: [],
-            listId:0
+            listId:5
         }
     }
     componentWillMount () { }
@@ -22,8 +22,7 @@ export default class Newest extends Component {
             url: 'http://api.budejie.com/api/api_open.php?a=category&c=subscribe',
             success: (res)=>{
                 this.setState({
-                    left:res.data.list,
-                    listId:res.data.list[0].listId
+                    left:res.data.list
                 })
             },
         });
@@ -69,7 +68,7 @@ export default class Newest extends Component {
                             <Image src={item.header}></Image>
                             <View className='rightName'>
                                 <View>{item.screen_name}</View>
-                                <Text>{item.tiezi_count}人关注</Text>
+                                <Text>{item.fans_count}人关注</Text>
                             </View>
                             <View className='GZ'>+关注</View>
                         </View>  
@@ -85,7 +84,7 @@ export default class Newest extends Component {
           listId: id
         })
         wx.request({
-            url: `http://api.budejie.com/api/api_open.php?a=list&c=subscribe&category_id=${this.state.listId}`,
+            url: `http://api.budejie.com/api/api_open.php?a=list&c=subscribe&category_id=${id}`,
             success: (res)=>{
                 this.setState({
                     right:res.data.list
