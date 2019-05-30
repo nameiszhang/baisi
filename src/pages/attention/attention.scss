@@ -1,0 +1,27 @@
+.attention{
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #eee;
+    >view{
+        text-align: center;
+    }
+    .text{
+        margin:100px 0;
+        color: gray;
+        >view{
+            padding:10px 0;
+        }
+    }
+    image{
+        width: 200px;
+        height: 200px;
+    }
+    button{
+        width:80%;
+        color: crimson;
+        font-size: 35px;
+    }
+}
