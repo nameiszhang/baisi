@@ -21,7 +21,19 @@ export default class Logon extends Component {
     render () {
         return (
         <View className='logon'>
-            <Button>登录</Button>
+            <View>
+                <Input placeholder='输入用户名'/>
+                <Input placeholder='请输入密码'/>
+            </View>
+            <View>
+                <Navigator url='/pages/mine/mine'>
+                    <Button>登录</Button>
+                </Navigator>
+            </View>
+            <View>
+                <Text>立即注册</Text>
+                <Text>忘记密码</Text>
+            </View>
         </View>
         )
     }
