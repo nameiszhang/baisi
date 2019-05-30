@@ -97,7 +97,7 @@ class Elite extends Component {
                             {
                                 type===41 && <View className='cont'>
                                     <View>{item.text}</View>
-                                    <Video controls style={{height:item.height+'rpx'}} src={item.videouri}></Video>
+                                    <Video controls poster={item.bimageuri} style={{height:item.height+'rpx'}} src={item.videouri}></Video>
                                 </View>
                             }
                             {
