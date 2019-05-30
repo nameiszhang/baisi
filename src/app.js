@@ -21,6 +21,7 @@ class App extends Component {
       'pages/attention/attention',
       'pages/mine/mine',
       'pages/pinglun/pinglun',
+      'pages/logon/logon',
       'pages/index/index',
     ],
     window: {

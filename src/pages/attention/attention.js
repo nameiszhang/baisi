@@ -21,7 +21,10 @@ export default class Attention extends Component {
     render () {
         return (
         <View className='attention'>
-            <Text>attention</Text>
+            <Image src='http://localhost:3000/images/关注page.png'></Image>
+            <Navigator url='/pages/logon/logon'>
+                <Button>立即登录/注册</Button>
+            </Navigator>
         </View>
         )
     }
