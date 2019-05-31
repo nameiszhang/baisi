@@ -3,7 +3,12 @@ import { View, Text } from '@tarojs/components'
 import './newest.scss'
 
 
-export default class Newest extends Component {
+import {connect} from '@tarojs/redux'
+import {bindActionCreators} from 'redux'
+import * as IndexAction from '../../store/index/action'
+
+
+class Newest extends Component {
 
     config = {
         navigationBarTitleText: '最新'
@@ -11,7 +16,7 @@ export default class Newest extends Component {
     constructor(){
         this.state={
             left:[],
-            right: [],
+            // right: [],
             listId:5
         }
     }
@@ -26,15 +31,16 @@ export default class Newest extends Component {
                 })
             },
         });
+        this.props.newsetData()
 
-        wx.request({
-            url: `http://api.budejie.com/api/api_open.php?a=list&c=subscribe&category_id=${this.state.listId}`,
-            success: (res)=>{
-                this.setState({
-                    right:res.data.list
-                })
-            },
-        });
+        // wx.request({
+        //     url: `http://api.budejie.com/api/api_open.php?a=list&c=subscribe&category_id=${this.state.listId}`,
+        //     success: (res)=>{
+        //         this.setState({
+        //             right:res.data.list
+        //         })
+        //     },
+        // });
     }
 
     componentWillUnmount () { }
@@ -45,6 +51,7 @@ export default class Newest extends Component {
 
     render () {
         let {left,right,listId} = this.state
+        let {changeRight,rightdata,GZ}=this.props
         return (
         <View className='newest'>
             <View id='left'>
@@ -54,7 +61,11 @@ export default class Newest extends Component {
                             <View className={listId===item.id ? 'active' : ''}
                             key={item.id}
                             onClick={()=>{
-                                this.changeRight(item.id)
+                                this.setState({
+                                  listId: item.id
+                                })
+                                changeRight(item.id)
+                                // this.changeRight(item.id)
                             }}>{item.name}</View> 
                         ))
                     }
@@ -63,14 +74,17 @@ export default class Newest extends Component {
             <View id='right'>
                 <View className='right'>
                 {
-                    right.map((item)=>(
+                    rightdata && rightdata.map((item,key) => (
                         <View key={item.id} className='rightItem'>
                             <Image src={item.header}></Image>
                             <View className='rightName'>
                                 <View>{item.screen_name}</View>
                                 <Text>{item.fans_count}人关注</Text>
                             </View>
-                            <View className='GZ'>+关注</View>
+                            <View className='GZ' onClick={()=>{
+                                GZ(key)
+                                this.forceUpdate()
+                            }}>{item.is_vip ? '已关注' : '+关注'}</View>
                         </View>  
                     ))
                 }
@@ -79,17 +93,8 @@ export default class Newest extends Component {
         </View>
         )
     }
-    changeRight=(id)=>{
-        this.setState({
-          listId: id
-        })
-        wx.request({
-            url: `http://api.budejie.com/api/api_open.php?a=list&c=subscribe&category_id=${id}`,
-            success: (res)=>{
-                this.setState({
-                    right:res.data.list
-                })
-            },
-        });
-    }
 }
+
+let mapState = state => state.IndexStore
+let mapDispatch = dispatch => bindActionCreators(IndexAction, dispatch)
+export default connect(mapState, mapDispatch)(Newest)

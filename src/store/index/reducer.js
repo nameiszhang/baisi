@@ -1,6 +1,7 @@
 const initStore={
     index:0,
-    id:0
+    id:0,
+    rightdata: []
 }
 const IndexStore=(state=initStore,action)=>{
     switch(action.type){
@@ -8,6 +9,12 @@ const IndexStore=(state=initStore,action)=>{
             return {
                 ...state,
                 id:action.id
+            }
+        default :
+        case 'RIGHT_DATA':
+            return {
+                ...state,
+                rightdata: action.rightdata
             }
         default :
         return state
