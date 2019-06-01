@@ -39,7 +39,7 @@ class Elite extends Component {
 
     componentDidMount () {
         wx.request({
-            url: `http://api.budejie.com/api/api_open.php?a=list&c=data&type=1`,
+            url: `https://api.budejie.com/api/api_open.php?a=list&c=data&type=1`,
             success: (result)=>{
                 this.setState({
                     data:result.data.list
@@ -149,7 +149,7 @@ class Elite extends Component {
           type: type
         })
         wx.request({
-            url: `http://api.budejie.com/api/api_open.php?a=list&c=data&type=${type}`,
+            url: `https://api.budejie.com/api/api_open.php?a=list&c=data&type=${type}`,
             success: (result) => {
                 this.setState({
                 data: result.data.list
